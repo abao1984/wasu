@@ -7,5 +7,6 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'wasu.views.home', name='home'),
     url(r'^boss/', include('boss.urls')),
+    url(r'^rmss/', include('rmss.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -1,4 +1,6 @@
+# coding=UTF-8
 """
+
 Django settings for wasu project.
 
 For more information on this file, see
@@ -37,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'boss',
+    'rmss',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -89,3 +92,34 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TEMPLATE_DIRS = (
+        os.path.join(BASE_DIR,'rmss/templates'),
+        )
+
+ENABLE  = u'启用'
+DISABLE = u'未启用'
+UNDO    = u'撤销'
+MACHINE_ROOM_CHOICES = ((ENABLE,u'启用'),(DISABLE,'未启用'),(UNDO,'撤销'),)
+
+YES = u'是'
+NO  = u'否'
+MONIROTING_CHOICES = ((YES,u'是'),(NO,u'否'),)
+
+AC = u'交流'
+DC = u'直流'
+BATTERY_TYPE_CHOICES = ((AC,u'交流'),(DC,u'直流'),)
+
+SINGLE = u'单路供电'
+DUAL   = u'双路供电'
+POWER_SUPPLY_CHOICES = ((SINGLE,u'单路供电'),(DUAL,u'双路供电'),)
+
+HAVE = u'有'
+NOT_HAVE = u'无'
+INTERFACE_CHOICES = ((HAVE,u'有'),(NOT_HAVE,u'无'),)
+
+A10 = '10A'
+A16 = '16A'
+A32 = '32A'
+A64 = '64A'
+AIR_SWITCH_CONFIGURATION_CHOICES = ((A10,'10A'),(A16,'16A'),(A32,'32A'),(A64,'64A'),)
