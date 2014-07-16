@@ -8,7 +8,17 @@
     margin-bottom: 20px;
     border-bottom:1px solid #e5e5e5;
 }
+.item {
+    border-top: 1px solid #e5e5e5;
+}
 </style>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+$(function(){
+        $("[data-toggle='tooltip']").tooltip();
+        });
+</script>
 {% endblock %}
 {% block main_content %}
 <div class="pagehead" id="content">
@@ -33,7 +43,7 @@
 </div>
 </div>
 </div>
-
+{% block leftmenu %}
 <div class="container">
 <div class="row">
 <div class="col-md-3">
@@ -46,18 +56,51 @@
     <hr>
     </div>
 </div>
+{% endblock %}
 <div class="col-md-9">
-<div>
-    <h3>
-    找到n个结果
-    </h3>
-    <ul class="list-group">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        机房管理 / 
+        <a href="{% url "rmss.views.machine_room_add_view" %}" class="" data-toggle="tooltip" data-placement="right" title="新增机房资源">
+     <span class="fa fa-plus"></span> </a>
+    </div>
+    <div class="panel-body">
         {% for item in items %}
-        <li class="list-group-item">
-        <a href="#">{{item.name}}</a>
-        </li>
+        <div class="alert">
+            <div><span class="fa fa-code"></span> {{item.room_id}}</div>
+            <div><span class="fa fa-link"></span> <a href="" >{{item.name}}</a></div>
+            {% if item.address %}
+            <div><span class="glyphicon glyphicon-map-marker"></span> {{item.address}}</div>
+            {% endif %}
+        </div>
         {% endfor %}
+    </div>
+    <div class="panel-footer">
+    <ul class="pagination">
+        {% if items.has_previous %}
+            <li class="previous">
+                <a href="">&laquo;</a>
+            </li>
+        </li>
+        {% endif %}
+        {% for num in items.page_range %}
+        {% if not num %}
+        <li class="disabled">
+            <a href="">...</a>
+        </li>
+        {% else %}
+        <li>
+        <a href="">{{num}}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if items.has_next %}
+        <li class="next">
+            <a href="">&raquo;</a>
+        </li>
+        {% endif %}
     </ul>
+    </div>
 </div>
 </div>
 </div>

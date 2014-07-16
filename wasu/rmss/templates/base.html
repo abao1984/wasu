@@ -16,7 +16,6 @@
     <style type="text/css">
     body{
         padding-top:60px;
-        padding-bottom:40px;
     }
     .footer{
         padding:40px 0;
@@ -25,8 +24,12 @@
         background-color:#f9f9f9;
         border-top: 1px solid #e5e5e5;
     }
+    .table thead>tr>th, .table tbody>tr>th, .table tfoot>tr>th, .table thead>tr>td, .table tbody>tr>td, .table tfoot>tr>td {
+        border-top:none;
+    }
     </style>
     {%block css_style%}{% endblock %}
+    {% block javascript %}{% endblock %}
 </head>
 <body>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
