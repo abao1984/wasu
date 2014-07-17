@@ -140,7 +140,7 @@
     <a href="" class="btn btn-xs btn-success" data-toggle="dropdown">添加设备 <span class="caret"></span></a>
     <ul class="dropdown-menu" role="menu">
         <li>
-            <a href="">UPS</a>
+            <a href="" data-toggle="modal" data-target="#modal-ups-add">UPS</a>
         </li>
         <li>
             <a href="">电池组</a>
@@ -167,6 +167,26 @@
             <a href="">消防</a>
         </li>
     </ul>
+    </div>
+    <div class="modal fade" id="modal-ups-add" tabindex="-1" role="dialog" aria-labelledby="my-modal-ups-add" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+    <button class="close" data-dismiss="modal" type="button">
+    <span aria-hidden="true">&times;</span>
+    <span class="sr-only">关闭</span>
+    </button>
+    <h4 class="modal-title" id="my-modal-ups-add">添加UPS设备</h4>
+    </div>
+    <div class="modal-body">
+    ...
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="submit" class="btn btn-primary" >保存</button>
+    </div>
+    </div>
+    </div>
     </div>
 </div>
 <div class="panel-body">
