@@ -30,7 +30,7 @@ class MachineRoom(models.Model):
     remark = models.TextField(blank=True)
     phone = models.CharField(max_length=30, blank=True)
     room_status = models.CharField(max_length=100,choices=MACHINE_ROOM_CHOICES,default=ENABLE)
-    start_date = models.DateField(auto_now=True, auto_now_add=True)
+    start_date = models.DateField()
 
     def __unicode__(self):
         return '[%s]%s'%(self.room_id, self.name)
