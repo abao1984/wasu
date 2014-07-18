@@ -34,9 +34,11 @@
 {%block pageright%}
 <div class="panel panel-default">
     <div class="panel-heading">
-        {% block object_name %}{% endblock %} / 
-        <a href="{% block object_add_url %}{% endblock %}" class="" data-toggle="tooltip" data-placement="right" title="{%block tooltip%}{% endblock %}">
-            <span class="fa fa-plus"></span> </a>
+        {% block object_name %}{% endblock %}  
+<!--            <span class="fa fa-plus"></span> </a>-->
+        <div class="pull-right">
+            <a class="btn-success btn btn-xs" href="{% block object_add_url %}{% endblock %}">{% block tooltip %}{% endblock %}</a>
+        </div>
     </div>
     <div class="panel-body">
         {% block object_list %}

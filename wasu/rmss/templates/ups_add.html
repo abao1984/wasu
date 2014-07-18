@@ -1,0 +1,120 @@
+{% extends "object_base.html" %}
+{% block title %}机房管理－－新增机房资源{% endblock %}
+{% block username %}developer{% endblock %}
+{% block pagehead %}
+<h3>新增机房资源</h3>
+{% endblock %}
+
+{% block pageleft %}
+<div class="col-md-3">
+	<div class="sidebar">
+		<ul class="nav-stacked nav nav-pills">
+            <li><a href="">IP资源管理</a></li>
+            <li><a href="">客户资源管理</a></li>
+            <li class="active"><a href="">机房资源管理</a></li>
+        </ul>
+	</div>
+</div>
+{% endblock %}
+
+{% block pageright %}
+<div class="panel panel-default">
+    <div class="panel-heading">UPS资源</div>
+    <div class="panel-body">
+        <form class="form-horizontal" method="post" action="" role="form">
+            {% csrf_token %}
+            <input type="hidden" name="machine_room" value="{{id}}" >
+            <div class="form-group">
+                <label for="id_manufacturer" class="col-xs-3 control-label">生产厂家</label>
+                <div class="col-sm-9">
+                    {{form.manufacturer}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_start_date" class="col-xs-3 control-label">启用日期</label>
+                <div class="col-sm-9">
+                    {{form.start_date}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_install_date" class="col-xs-3 control-label">安装日期</label>
+                <div class="col-sm-9">
+                    {{form.install_date}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_specification" class="col-xs-3 control-label">设备型号</label>
+                <div class="col-sm-9">
+                    {{form.specification}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_code" class="col-xs-3 control-label">编号</label>
+                <div class="col-sm-9">
+                    {{form.code}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_gateway" class="col-xs-3 control-label">网关</label>
+                <div class="col-sm-9">
+                    {{form.getway}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_gateway_address" class="col-xs-3 control-label">网关地址</label>
+                <div class="col-sm-9">
+                    {{form.gateway_address}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_netcard_sn" class="col-xs-3 control-label">网卡序列号</label>
+                <div class="col-sm-9">
+                    {{form.netcard_sn}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_configuration" class="col-xs-3 control-label">配置情况</label>
+                <div class="col-sm-9">
+                    {{form.configuration}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_manufacturer" class="col-xs-3 control-label">状态</label>
+                <div class="col-sm-9">
+                    {{form.manufacturer}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_manufacturer" class="col-xs-3 control-label">资产编号</label>
+                <div class="col-sm-9">
+                    {{form.manufacturer}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_manufacturer" class="col-xs-3 control-label">设备使用年限</label>
+                <div class="col-sm-9">
+                    {{form.manufacturer}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_manufacturer" class="col-xs-3 control-label">厂家联系电话</label>
+                <div class="col-sm-9">
+                    {{form.manufacturer}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_manufacturer" class="col-xs-3 control-label">维保周期</label>
+                <div class="col-sm-9">
+                    {{form.manufacturer}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_manufacturer" class="col-xs-3 control-label">代维单位</label>
+                <div class="col-sm-9">
+                    {{form.manufacturer}}
+                </div>
+            </div>
+        <form>
+    </div>
+</div>
+{% endblock %}

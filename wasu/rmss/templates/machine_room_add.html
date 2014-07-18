@@ -24,7 +24,7 @@
         <form class="form-horizontal" method="post" action="" role="form">
             {% csrf_token %}
             <div class="form-group">
-                <label class="control-label col-xs-2" for="id_room_id">机房ID</label>
+                <label class="control-label col-xs-3" for="id_room_id">机房ID</label>
                 <div class="col-xs-7">
                     {% if form.room_id.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.room_id.errors}}</div>
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2" for="id_name">机房名称</label>
+                <label class="control-label col-xs-3" for="id_name">机房名称</label>
                 <div class="col-xs-7">
                     {% if form.name.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.name.errors}}</div>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2" for="id_room_type">机房类型</label>
+                <label class="control-label col-xs-3" for="id_room_type">机房类型</label>
                 <div class="col-xs-7">
                     {% if form.room_type.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.room_type.errors}}</div>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2" for="id_area">所属区域</label>
+                <label class="control-label col-xs-3" for="id_area">所属区域</label>
                 <div class="col-xs-7">
                     {% if form.area.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.area.errors}}</div>
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2" for="id_address">机房地址</label>
+                <label class="control-label col-xs-3" for="id_address">机房地址</label>
                 <div class="col-xs-7">
                     {% if form.address.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.address.errors}}</div>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2" for="id_cover_range">覆盖范围</label>
+                <label class="control-label col-xs-3" for="id_cover_range">覆盖范围</label>
                 <div class="col-xs-7">
                     {% if form.cover_range.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.cover_range.errors}}</div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-xs-offset-2 col-xs-7">
+                <div class="col-xs-offset-3 col-xs-7">
                     {% if form.is_all_net.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.is_all_net.errors}}</div>
                     {% endif %}
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2" for="id_remark">备注</label>
+                <label class="control-label col-xs-3" for="id_remark">备注</label>
                 <div class="col-xs-7">
                     {% if form.remark.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.remark.errors}}</div>
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2" for="id_phone">电话</label>
+                <label class="control-label col-xs-3" for="id_phone">电话</label>
                 <div class="col-xs-7">
                     {% if form.phone.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.phone.errors}}</div>
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2" for="id_room_status">状态</label>
+                <label class="control-label col-xs-3" for="id_room_status">状态</label>
                 <div class="col-xs-7">
                     {% if form.room_status.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.room_status.errors}}</div>
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2" for="id_start_date">启用日期</label>
+                <label class="control-label col-xs-3" for="id_start_date">启用日期</label>
                 <div class="col-xs-7">
                     {% if form.start_date.errors %}
                     <div class="alert-warning alert" rol="alert">{{form.start_date.errors}}</div>
@@ -126,51 +126,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-xs-offset-2 col-xs-7">
+                <div class="col-xs-offset-3 col-xs-7">
                     <button class="btn-primary btn" type="submit">保存</button>
                 </div>
             </div>
             <form>
             </div>
         </div>
-<!--<div class="panel panel-default">-->
-<!--<div class="panel-heading">-->
-<!--    机房设备 -->
-<!--    <div class="pull-right dropdown clearfix">-->
-<!--    <a href="" class="btn btn-xs btn-success" data-toggle="dropdown">添加设备 <span class="caret"></span></a>-->
-<!--    <ul class="dropdown-menu" role="menu">-->
-<!--        <li>-->
-<!--            <a href="">UPS</a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="">电池组</a>-->
-<!--        </li>-->
-<!--        <li class="divider"></li>-->
-<!--        <li>-->
-<!--            <a href="">空调</a>-->
-<!--        </li>-->
-<!--        <li class="divider"></li>-->
-<!--        <li>-->
-<!--            <a href="">开关柜</a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="">列头柜</a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="">配电柜</a>-->
-<!--        </li>-->
-<!--        <li class="divider"></li>-->
-<!--        <li>-->
-<!--            <a href="">门禁</a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="">消防</a>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="panel-body">-->
-<!--    body-->
-<!--</div>-->
-<!--</div>-->
 {% endblock %}

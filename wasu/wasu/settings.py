@@ -101,6 +101,7 @@ ENABLE  = u'启用'
 DISABLE = u'未启用'
 UNDO    = u'撤销'
 MACHINE_ROOM_CHOICES = ((ENABLE,u'启用'),(DISABLE,'未启用'),(UNDO,'撤销'),)
+STATUS_CHOICES = ((ENABLE,u'启用'), (DISABLE, u'未启用'))
 
 YES = u'是'
 NO  = u'否'

@@ -9,12 +9,14 @@ def rmss_response(request,dic,template):
     return render_to_response(template,dic,context_instance=RequestContext(request))
 
 def machine_room_detail_view(request,id):
+    instance = get_object_or_404(MachineRoom, id=id)
     if request.POST:
-        pass
+        form = MachineRoomForm(request.POST,instance=instance)
+        if form.is_valid():
+            room = form.save()
     else:
-        instance = get_object_or_404(MachineRoom, id=id)
         form = MachineRoomForm(instance=instance)
-        return rmss_response(request,{'form':form}, 'machine_room_detail.html')
+    return rmss_response(request,{'form':form,'id':id}, 'machine_room_detail.html')
 
 def machine_room_list_view(request):
     page = request.GET.get('page','1')
@@ -43,16 +45,26 @@ def machine_room_add_view(request):
 def machine_room_advance_search_view(request):
     pass
 
-def machine_room_delete_view(request):
-    pass
+def machine_room_delete_view(request, id):
+    instance = get_object_or_404(MachineRoom,id=id)
+    instance.delete()
+    return redirect('rmss.views.machine_room_list_view')
 
-def ups_add_view(request):
+def ups_add_view(request,room_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
     if request.POST:
         instance = UPS()
+        instance.machine_room = room
         form = UPSForm(request.POST, instance=instance)
         if form.is_valid():
             ups = form.save()
             return redirect('rmss.views.machine_room_detail_view',id=ups.machine_room.id)
         else:
             return redirect('rmss.views.machine_room_detail_view',id=request.POST.get('machine_room',''))
-    return HttpResponse('error')
+    form = UPSForm()
+    return rmss_response(request,{'form':form,'id':room_id},'ups_add.html') 
+
+def ups_list_view(request, room_id):
+    room = get_object_or_404(MachineRoom,id=room_id)
+    items = UPS.objects.filter(machine_room=room)
+    return rmss_response(request,{'items':items,'id':room_id},'ups_list.html')

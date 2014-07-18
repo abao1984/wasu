@@ -36,13 +36,13 @@ class MachineRoom(models.Model):
         return '[%s]%s'%(self.room_id, self.name)
     
 class Equipment(models.Model):
-    start_date = models.DateField(auto_now=True,auto_now_add=True)
+    start_date = models.DateField()
     is_started = models.BooleanField()
     manufacturer = models.CharField(max_length=100)
     specification = models.CharField(max_length=100)
     code = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
-    install_date = models.DateField(auto_now=True,auto_now_add=True)
+    install_date = models.DateField()
     asset_id = models.CharField(max_length=100)
     equipment_life = models.IntegerField()
     phone = models.CharField(max_length=100)
@@ -54,13 +54,15 @@ class Equipment(models.Model):
     machine_room = models.ForeignKey(MachineRoom)
 
     def __unicode__(self):
-        return '%s %s' % (self.machine_room.name,self.name)
+        return '%s-%s' % (self.machine_room.name,self.name)
 
 class UPS(Equipment):
     gateway = models.CharField(max_length=100)
+    gateway_address = models.CharField(max_length=100)
     netcard_sn = models.CharField(max_length=100)
     configuration = models.CharField(max_length=100)
-
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default=ENABLE)
+    
     def __unicode__(self):
         return '%s %s' % (self.machine_room.name,self.name)
 
@@ -69,6 +71,7 @@ class Battery(Equipment):
     capacity = models.CharField(max_length=100)
     session_count = models.IntegerField()
     size = models.CharField(max_length=100)
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default=ENABLE)
     
     def __unicode__(self):
         return '%s %s' % (self.machine_room.name,self.name)

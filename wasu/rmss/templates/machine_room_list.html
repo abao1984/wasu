@@ -12,22 +12,20 @@
 {% block object_add_url %}{% url "rmss.views.machine_room_add_view" %}{% endblock %}
 {% block tooltip %}新增机房资源{% endblock %}
 {% block object_list %}
-{% for item in items %}
-<div class="alert">
-    <div>
-        <span class="fa-code fa"></span>{{item.room_id}}
-    </div>
-    <div>
-        <span class="fa-link fa"></span>
-        <a href="">{{item.name}}</a>
-    </div>
-    {% if item.address %}
-    <div>
-        <span class="glyphicon-map-marker glyphicon"></span>{{item.address}}
-    </div>
-    {% endif %}
-</div>
-{% endfor %}
+<table class="table table-striped">
+    <tr>
+        <th class="col-xs-2"><span class="fa-code fa"></span> 机房代码</th>
+        <th class="col-xs-4"><span class="fa-link fa"></span> 机房名称</th>
+        <th><span class="glyphicon-map-marker glyphicon"> 地址</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td><a href="{% url "rmss.views.machine_room_detail_view" item.id %}">{{item.room_id}}</a></td>
+        <td>{{item.name}}</td>
+        <td>{{item.address}}</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}
 {% block pagination %}
 <ul class="pagination">
