@@ -1,8 +1,8 @@
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.template import Context, RequestContext
-from rmss.models import MachineRoom, UPS
+from rmss.models import MachineRoom, UPS, Battery
 from dig_paginator import DiggPaginator
-from rmss.admin import MachineRoomForm, UPSForm
+from rmss.admin import MachineRoomForm, UPSForm, BatteryForm
 from django.http import HttpResponse
 # Create your views here.
 def rmss_response(request,dic,template):
@@ -58,13 +58,59 @@ def ups_add_view(request,room_id):
         form = UPSForm(request.POST, instance=instance)
         if form.is_valid():
             ups = form.save()
-            return redirect('rmss.views.machine_room_detail_view',id=ups.machine_room.id)
+            return redirect('rmss.views.ups_list_view',room_id=room_id)
         else:
-            return redirect('rmss.views.machine_room_detail_view',id=request.POST.get('machine_room',''))
+            return redirect('rmss.views.ups_list_view',room_id=room_id)
     form = UPSForm()
-    return rmss_response(request,{'form':form,'id':room_id},'ups_add.html') 
+    return rmss_response(request,{'form':form,'room':room},'ups_add.html') 
 
 def ups_list_view(request, room_id):
     room = get_object_or_404(MachineRoom,id=room_id)
     items = UPS.objects.filter(machine_room=room)
-    return rmss_response(request,{'items':items,'id':room_id},'ups_list.html')
+    return rmss_response(request,{'items':items,'room':room},'ups_list.html')
+
+def ups_detail_view(request,room_id, ups_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    ups = get_object_or_404(UPS,id = ups_id)
+    form = UPSForm(instance=ups)
+    if request.POST:
+        form = UPSForm(request.POST, instance=ups)
+        return redirect('rmss.views.ups_list_view',room_id=room_id)
+    return rmss_response(request,{'form':form,'room':room, 'ups':ups},'ups_detail.html')
+
+def battery_list_view(request, room_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    items = Battery.objects.filter(machine_room=room)
+    return rmss_response(request, {'items':items, 'room':room},'battery_list.html')
+
+def battery_add_view(request, room_id):
+    room = get_object_or_404(MachineRoom,id=room_id)
+    if request.POST:
+        instance = Battery()
+        instance.machine_room = room
+        default_data = request.POST.copy()
+        default_data['machine_room'] = room_id
+        form = BatteryForm(default_data, instance=instance)
+        if form.is_valid():
+            battery = form.save()
+            return redirect('rmss.views.battery_list_view', room_id=room_id)
+        print '@97',form.errors
+        return rmss_response(request, {'form':form, 'room':room}, 'battery_add.html')
+    else:
+        form = BatteryForm()
+        return rmss_response(request, {'form':form, 'room':room}, 'battery_add.html')
+
+def battery_detail_view(request,room_id, battery_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    battery = get_object_or_404(Battery, id=battery_id)
+    form = BatteryForm(instance=battery)
+    if request.POST:
+        default_data = request.POST.copy()
+        default_data['machine_room'] = room_id
+        form = BatteryForm(default_data, instance=battery)
+        print '@109',form.errors 
+        if form.is_valid():
+            battery = form.save()
+            return redirect('rmss.views.battery_list_view',room_id=room_id)
+    return rmss_response(request, {'form':form, 'room':room, 'battery':battery}, 'battery_detail.html')
+

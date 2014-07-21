@@ -5,6 +5,7 @@ import sys
 import codecs
 import csv
 from StringIO import StringIO as BytesIO
+from datetime import datetime,date
 
 class Recoder(object):
     def __init__(self, stream, decoder, encoder, eol='\r\n'):
@@ -89,6 +90,7 @@ class Command(NoArgsCommand):
             m.remark = line[10]
             m.is_all_net = False 
             m.phone = ''
+            m.start_date = date.today() 
             m.save()
 
     def handle_noargs(self, **options):

@@ -1,7 +1,56 @@
+# coding=UTF-8
 from django.contrib import admin
 from django.forms import ModelForm
 from models import *
-from django.forms import TextInput, DateInput, Select, Textarea, CheckboxInput
+from django.forms import TextInput, DateInput, Select, Textarea, CheckboxInput,HiddenInput
+
+class BatteryForm(ModelForm):
+    class Meta:
+        model = Battery
+        widgets = {
+                 'name':TextInput(attrs={'class':'form-control'}),
+                 'start_date':TextInput(attrs={'class':'form-control'}),
+                 'is_started':HiddenInput(attrs={'class':'form-control'}),
+                 'manufacturer':TextInput(attrs={'class':'form-control'}),
+                 'specification':TextInput(attrs={'class':'form-control'}),
+                 'code':HiddenInput(attrs={'class':'form-control'}),
+                 'install_date':TextInput(attrs={'class':'form-control'}),
+                 'asset_id':TextInput(attrs={'class':'form-control'}),
+                 'equipment_life':TextInput(attrs={'class':'form-control'}),
+                 'phone':TextInput(attrs={'class':'form-control'}),
+                 'maintenance_cycles':TextInput(attrs={'class':'form-control'}),
+                 'maintenance_unit':TextInput(attrs={'class':'form-control'}),
+                 'is_monitoring':HiddenInput(attrs={'class':'form-control'}),
+                 'machine_room':HiddenInput(attrs={'class':'form-control'}),
+
+                 'battery_type':Select(attrs={'class':'form-control'}),
+                 'capacity':TextInput(attrs={'class':'form-control'}),
+                 'session_count':TextInput(attrs={'class':'form-control'}),
+                 'size':TextInput(attrs={'class':'form-control'}),
+                 'status':Select(attrs={'class':'form-control'}),
+
+                }
+        labels = {
+                'name':u'名称',
+                'start_date':u'启用日期',
+                'is_started':u'是否启用',
+                'manufacturer':u'设备厂家',
+                'specification':u'规格型号',
+                'code':u'代码',
+                'install_date':u'安装日期',
+                'asset_id':u'资产编号',
+                'equipment_life':u'设备使用年限',
+                'phone':u'厂家联系电话',
+                'maintenance_cycles':u'维保周期',
+                'maintenance_unit':u'代维单位',
+                'is_monitoring':u'是否监控',
+                'machine_room':u'所属机房',
+                'battery_type':u'电池类型',
+                'capacity':u'电池容量',
+                'session_count':u'电池组节数',
+                'size':u'尺寸规格',
+                'status':u'电池组状态',
+                }
 
 class UPSForm(ModelForm):
     class Meta:
@@ -19,11 +68,33 @@ class UPSForm(ModelForm):
                  'maintenance_unit':TextInput(attrs={'class':'form-control'}),
                  'is_monitoring':Select(attrs={'class':'form-control'}),
                  'machine_room':Select(attrs={'class':'form-control'}),
+                 'status':Select(attrs={'class':'form-control'}),
                  'install_date':DateInput(attrs={'class':'form-control'}),
 
                  'gateway':TextInput(attrs={'class':'form-control'}),
+                 'gateway_address':TextInput(attrs={'class':'form-control'}),
                  'netcard_sn':TextInput(attrs={'class':'form-control'}),
                  'configuration':TextInput(attrs={'class':'form-control'}),
+                }
+        labels = {
+                'start_date':u'启用日期',
+                'manufacturer':u'设备厂家',
+                'specification':u'规格型号',
+                'code':u'UPS编号',
+                'name':u'名称',
+                'asset_id':u'资产编号',
+                'equipment_life':u'设备使用年限',
+                'phone':u'厂家联系电话',
+                'maintenance_cycles':u'维保周期',
+                'maintenance_unit':u'代维单位',
+                'is_monitoring':u'是否监控',
+                'machine_room':u'所属机房',
+                'status':u'UPS状态',
+                'install_date':u'安装日期',
+                'gateway':u'UPS网关',
+                'gateway_address':u'UPS网关地址',
+                'netcard_sn':u'UPS网卡序列号',
+                'configuration':u'配置情况',
                 }
 
 class MachineRoomForm(ModelForm):
@@ -41,6 +112,18 @@ class MachineRoomForm(ModelForm):
                 'phone':TextInput(attrs={'class':'form-control'}),
                 'room_status':Select(attrs={'class':'form-control'}),
                 'start_date':DateInput(attrs={'class':'form-control'}),
+                }
+        labels = {
+                'room_id':u'机房ID',
+                'room_type':u'机房类型',
+                'area':u'所属区域',
+                'name':u'名称',
+                'address':u'地址',
+                'cover_range':u'覆盖范围',
+                'is_all_net':u'是否全网',
+                'phone':u'联系电话',
+                'room_status':u'状态',
+                'start_date':u'启用日期',
                 }
 
 # Register your models here.

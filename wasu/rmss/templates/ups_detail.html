@@ -2,7 +2,17 @@
 {% block title %}机房管理－－新增机房资源{% endblock %}
 {% block username %}developer{% endblock %}
 {% block pagehead %}
-<h3>新增机房资源</h3>
+<ol class="breadcrumb">
+    <li>
+    <a href="{% url "rmss.views.machine_room_list_view" %}">机房资源</a>
+    </li>
+    <li class="">
+    <a href="{% url "rmss.views.machine_room_detail_view" room.id %}">
+    {{room.room_id}}
+    </a>
+    </li>
+    <li class="active">{{ups.name}}</li>
+</ol>
 {% endblock %}
 
 {% block pageleft %}
@@ -18,6 +28,23 @@
 {% endblock %}
 
 {% block pageright %}
+<div class="tabbable tabs-right">
+<ul class="nav-tabs nav">
+<li><a href="{% url "rmss.views.machine_room_detail_view" room.id %}" >机房资源</a></li>
+        <li class="active"><a href="{% url "rmss.views.ups_list_view" room.id %}">UPS</a></li>
+        <li><a href="">电池组</a></li>
+        <li><a href="">空调</a></li>
+        <li><a href="">开关柜</a></li>
+        <li><a href="">列头柜</a></li>
+        <li><a href="">配电柜</a></li>
+        <li><a href="">监控</a></li>
+        <li><a href="">门禁</a></li>
+        <li><a href="">消防</a></li>
+
+</ul>
+</div>
+<div class="tab-content">
+<div class="tab-pane active col-xs-10 pull-right">
 <div class="panel panel-default">
     <div class="panel-heading">UPS资源</div>
     <div class="panel-body">
@@ -123,9 +150,14 @@
             <div class="form-group">
                 <div class="col-xs-offset-3 col-sm-9">
                     <button class="btn-primary btn" type="submit" >保存</button>
+                    <button class="btn-danger btn">删除</button>
                 </div>
             </div>
         <form>
     </div>
 </div>
+
+</div>
+</div>
+
 {% endblock %}

@@ -2,7 +2,13 @@
 {% block title %}机房管理－－新增机房资源{% endblock %}
 {% block username %}developer{% endblock %}
 {% block pagehead %}
-<h3>新增机房资源</h3>
+<!--<h3>机房资源</h3>-->
+<ol class="breadcrumb">
+    <li>
+    <a href="{% url "rmss.views.machine_room_list_view" %}">机房资源</a>
+    </li>
+    <li class="active">{{form.room_id.value}}</li>
+</ol>
 {% endblock %}
 
 {% block pageleft %}
@@ -22,7 +28,7 @@
     <ul class="nav-tabs nav">
         <li class="active"><a href="" >机房资源</a></li>
         <li><a href="{% url "rmss.views.ups_list_view" id %}">UPS</a></li>
-        <li><a href="">电池组</a></li>
+        <li><a href="{% url "rmss.views.battery_list_view" id %}">电池组</a></li>
         <li><a href="">空调</a></li>
         <li><a href="">开关柜</a></li>
         <li><a href="">列头柜</a></li>
@@ -154,4 +160,5 @@
             </div>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}

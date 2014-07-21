@@ -1,0 +1,81 @@
+{% extends "object_base.html" %}
+{% block title %}机房管理－－新增电池组{% endblock %}
+{% block username %}developer{% endblock %}
+{% block pagehead %}
+<ol class="breadcrumb">
+    <li>
+    <a href="{% url "rmss.views.machine_room_list_view" %}">机房资源</a>
+    </li>
+    <li>
+    <a href="{% url "rmss.views.machine_room_detail_view" room.id %}">
+        {{room.room_id}}
+    </a>
+    </li>
+    <li class="active">新增电池组</li>
+</ol>
+{% endblock %}
+
+{% block pageleft %}
+<div class="col-md-3">
+    <div class="sidebar">
+        <ul class="nav-stacked nav nav-pills">
+            <li><a href="">IP资源管理</a></li>
+            <li><a href="">客户资源管理</a></li>
+            <li class="active"><a href="">机房资源管理</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block pageright %}
+<div class="tabbable tabs-right">
+    <ul class="nav-tabs nav">
+        <li><a href="{% url "rmss.views.machine_room_detail_view" room.id %}" >机房资源</a></li>
+        <li class=""><a href="{% url "rmss.views.ups_list_view" room.id %}">UPS</a></li>
+        <li class="active"><a href="{% url "rmss.views.battery_list_view" room.id %}">电池组</a></li>
+        <li><a href="">空调</a></li>
+        <li><a href="">开关柜</a></li>
+        <li><a href="">列头柜</a></li>
+        <li><a href="">配电柜</a></li>
+        <li><a href="">监控</a></li>
+        <li><a href="">门禁</a></li>
+        <li><a href="">消防</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active col-xs-10 pull-right">
+            <div class="panel panel-default">
+                <div class="panel-heading">电池组</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" method="post" action="" role="form">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        {% if field.is_hidden %}
+                        {{field}}
+                        {% else %}
+                        <div class="form-group">
+                            <label for="id_{{field.name}}" class="col-xs-3 control-label">{{field.label}}</label>
+                            <div class="col-xs-9">
+                                {{field}}
+                                {% if field.errors %}
+                                <small class="help-block text-warning" >
+                                {% for error in field.errors %}
+                                    {{error}}
+                                {% endfor %}
+                                </small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        <div class="form-group">
+                            <div class="col-xs-offset-3 col-sm-9">
+                                <button class="btn-primary btn" type="submit" >保存</button>
+                            </div>
+                        </div>
+                    <form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

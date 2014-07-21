@@ -30,7 +30,7 @@ class MachineRoom(models.Model):
     remark = models.TextField(blank=True)
     phone = models.CharField(max_length=30, blank=True)
     room_status = models.CharField(max_length=100,choices=MACHINE_ROOM_CHOICES,default=ENABLE)
-    start_date = models.DateField()
+    start_date = models.DateField(blank=True)
 
     def __unicode__(self):
         return '[%s]%s'%(self.room_id, self.name)
@@ -40,7 +40,7 @@ class Equipment(models.Model):
     is_started = models.BooleanField()
     manufacturer = models.CharField(max_length=100)
     specification = models.CharField(max_length=100)
-    code = models.CharField(max_length=100)
+    code = models.CharField(max_length=100, blank=True)
     name = models.CharField(max_length=100)
     install_date = models.DateField()
     asset_id = models.CharField(max_length=100)
@@ -49,7 +49,7 @@ class Equipment(models.Model):
     maintenance_cycles = models.CharField(max_length=100)
     maintenance_unit = models.CharField(max_length=100)
 
-    is_monitoring = models.CharField(max_length=100, choices= MONIROTING_CHOICES,default=NO)
+    is_monitoring = models.CharField(max_length=100, choices= MONIROTING_CHOICES,default=NO,blank=True)
 
     machine_room = models.ForeignKey(MachineRoom)
 
