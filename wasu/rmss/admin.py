@@ -4,6 +4,42 @@ from django.forms import ModelForm
 from models import *
 from django.forms import TextInput, DateInput, Select, Textarea, CheckboxInput,HiddenInput
 
+class MonitorEquipmentForm(ModelForm):
+    class Meta:
+        model = MonitorEquipment
+        widgets = {
+            'start_date':TextInput(attrs={'class':'form-control'}),
+            'is_started':TextInput(attrs={'class':'form-control'}),
+            'manufacturer':TextInput(attrs={'class':'form-control'}),
+            'specification':TextInput(attrs={'class':'form-control'}),
+            'code':TextInput(attrs={'class':'form-control'}),
+            'name':TextInput(attrs={'class':'form-control'}),
+            'install_date':TextInput(attrs={'class':'form-control'}),
+            'asset_id':TextInput(attrs={'class':'form-control'}),
+            'equipment_life':TextInput(attrs={'class':'form-control'}),
+            'phone':TextInput(attrs={'class':'form-control'}),
+            'maintenance_cycles':TextInput(attrs={'class':'form-control'}),
+            'maintenance_unit':TextInput(attrs={'class':'form-control'}),
+            'is_monitoring':Select(attrs={'class':'form-control'}),
+            'machine_room':HiddenInput(attrs={'class':'form-control'}),
+        }
+        labels = {
+            'start_date':u'启动日期',
+            'is_started':u'设备厂家',
+            'manufacturer':u'设备厂家',
+            'specification':u'规格型号',
+            'code':u'监控编号',
+            'name':u'监控名称',
+            'install_date':u'安装日期',
+            'asset_id':u'资产编号',
+            'equipment_life':u'设备使用年限',
+            'phone':u'厂家联系电话',
+            'maintenance_cycles':u'维保周期',
+            'maintenance_unit':u'代维单位',
+            'is_monitoring':u'是否监控',
+            'machine_room':u'机房',
+        }
+
 class AirSwitchForm(ModelForm):
     class Meta:
         model = AirSwitch
