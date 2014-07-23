@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response, redirect, get_object_or
 from django.template import Context, RequestContext
 from rmss.models import MachineRoom, UPS, Battery
 from dig_paginator import DiggPaginator
+from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
 from rmss.admin import MachineRoomForm, UPSForm, BatteryForm
 from django.http import HttpResponse
 # Create your views here.
