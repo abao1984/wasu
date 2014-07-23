@@ -1,9 +1,9 @@
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.template import Context, RequestContext
-from rmss.models import MachineRoom, UPS, Battery, AirConditioning,SwitchGearCabinet,ColumnHeadCabinet, DistributionCabinet
+from rmss.models import MachineRoom, UPS, Battery, AirConditioning,SwitchGearCabinet,ColumnHeadCabinet, DistributionCabinet, AirSwitch
 from dig_paginator import DiggPaginator
 from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
-from rmss.admin import MachineRoomForm, UPSForm, BatteryForm,ACForm, SwitchGearCabinetForm,ColumnHeadCabinetForm, DistributionCabinetForm
+from rmss.admin import MachineRoomForm, UPSForm, BatteryForm,ACForm, SwitchGearCabinetForm,ColumnHeadCabinetForm, DistributionCabinetForm, AirSwitchForm
 from django.http import HttpResponse
 # Create your views here.
 def rmss_response(request,dic,template):
@@ -185,7 +185,8 @@ def switch_gear_detail_view(request, room_id, cabinet_id):
         if form.is_valid():
             cabinet = form.save()
             return redirect('rmss.views.power_cabinet_list_view', room_id)
-    return rmss_response(request, {'form':form, 'room':room}, 'switch_gear_detail.html')
+    airswitch_list = AirSwitch.objects.filter(switch_gear_cabinet=cabinet)
+    return rmss_response(request, {'form':form, 'room':room,'cabinet_id':cabinet_id,'airswitch_list':airswitch_list}, 'switch_gear_detail.html')
 
 def column_head_add_view(request, room_id):
     room = get_object_or_404(MachineRoom, id=room_id)
@@ -215,7 +216,7 @@ def column_head_detail_view(request, room_id, cabinet_id):
         if form.is_valid():
             cabinet = form.save()
             return redirect('rmss.views.power_cabinet_list_view', room_id)
-    return rmss_response(request, {'form':form, 'room':room}, 'column_head_detail.html')
+    return rmss_response(request, {'form':form, 'room':room,'cabinet_id':cabinet_id}, 'column_head_detail.html')
 
 def distribution_add_view(request, room_id):
     room = get_object_or_404(MachineRoom, id=room_id)
@@ -245,5 +246,38 @@ def distribution_detail_view(request, room_id, cabinet_id):
         if form.is_valid():
             cabinet = form.save()
             return redirect('rmss.views.power_cabinet_list_view', room_id)
-    return rmss_response(request, {'form':form, 'room':room}, 'distribution_detail.html')
+    return rmss_response(request, {'form':form, 'room':room,'cabinet_id':cabinet_id}, 'distribution_detail.html')
 
+def airswitch_add_view(request, room_id, cabinet_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    cabinet = get_object_or_404(SwitchGearCabinet, id=cabinet_id)
+    if request.POST:
+        instance = AirSwitch()
+        instance.switch_gear_cabinet = cabinet
+        default_data = request.POST.copy()
+        default_data["switch_gear_cabinet"] = cabinet.id
+        form = AirSwitchForm(default_data, instance=instance)
+        if form.is_valid():
+            air_switch = form.save()
+            return redirect('rmss.views.switch_gear_detail_view', room.id, cabinet_id)
+        else:
+            return rmss_response(request, {'form':form,'room':room, 'cabinet':cabinet}, 'airswitch_add.html')
+    else:
+        form = AirSwitchForm()
+        return rmss_response(request, {'form':form, 'room':room, 'cabinet':cabinet}, 'airswitch_add.html')
+        
+def airswitch_detail_view(request, room_id, cabinet_id, airswitch_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    cabinet = get_object_or_404(SwitchGearCabinet, id=cabinet_id)
+    airswitch = get_object_or_404(AirSwitch, id=airswitch_id)
+    form  = AirSwitchForm(instance=airswitch)
+    if request.POST:
+        default_data = request.POST.copy()
+        default_data['switch_gear_cabinet'] = cabinet_id
+        form = AirSwitchForm(default_data,instance=airswitch)
+        if form.is_valid():
+            airswitch = form.save()
+            return redirect('rmss.views.switch_gear_detail_view', room.id,cabinet_id)
+    return rmss_response(request,{'form':form,'room':room, 'cabinet':cabinet}, 'airswitch_detail.html')
+        
+        

@@ -92,7 +92,8 @@ class SwitchGearCabinet(Equipment):
 class AirSwitch(models.Model):
     name = models.CharField(max_length=100)
     configuration = models.CharField(max_length=100,choices=AIR_SWITCH_CONFIGURATION_CHOICES,default=A10)
-
+    total_count = models.IntegerField()
+    used_count = models.IntegerField()
     switch_gear_cabinet = models.ForeignKey(SwitchGearCabinet)
 
     def __unicode__(self):

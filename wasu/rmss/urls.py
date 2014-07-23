@@ -27,4 +27,7 @@ urlpatterns = patterns(
     (r'^column_head_detail/(?P<room_id>[0-9]+)/(?P<cabinet_id>[0-9]+)/$',column_head_detail_view),
     (r'^distribution_detail/(?P<room_id>[0-9]+)/(?P<cabinet_id>[0-9]+)/$',distribution_detail_view),
     (r'^power_cabinet_list/(?P<room_id>[0-9]+)/$',power_cabinet_list_view),
+
+    (r'^airswitch_add/(?P<room_id>[0-9]+)/(?P<cabinet_id>[0-9]+)/$', airswitch_add_view),
+    (r'^airswitch_add/(?P<room_id>[0-9]+)/(?P<cabinet_id>[0-9]+)/(?P<airswitch_id>[0-9]+)/$', airswitch_detail_view),
     )

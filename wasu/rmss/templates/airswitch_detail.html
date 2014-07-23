@@ -1,17 +1,18 @@
 {% extends "object_base.html" %}
-{% block title %}机房管理－－新增开关柜{% endblock %}
+{% block title %}机房管理－－电力设备--修改空开配置{% endblock %}
 {% block username %}developer{% endblock %}
 {% block pagehead %}
 <ol class="breadcrumb">
     <li>
     <a href="{% url "rmss.views.machine_room_list_view" %}">机房资源</a>
     </li>
+    
     <li>
     <a href="{% url "rmss.views.machine_room_detail_view" room.id %}">
         {{room.room_id}}
     </a>
     </li>
-    <li class="active">新增开关柜</li>
+    <li class="active">修改空开配置</li>
 </ol>
 {% endblock %}
 
@@ -35,8 +36,6 @@
         <li class=""><a href="{% url "rmss.views.battery_list_view" room.id %}">电池组</a></li>
         <li class=""><a href="{% url "rmss.views.ac_list_view" room.id %}">空调</a></li>
         <li class="active"><a href="{% url "rmss.views.power_cabinet_list_view" room.id %}">电力设备</a></li>
-        <li><a href="">列头柜</a></li>
-        <li><a href="">配电柜</a></li>
         <li><a href="">监控</a></li>
         <li><a href="">门禁</a></li>
         <li><a href="">消防</a></li>
@@ -44,7 +43,7 @@
     <div class="tab-content">
         <div class="tab-pane active col-xs-10 pull-right">
             <div class="panel panel-default">
-                <div class="panel-heading">开关柜</div>
+                <div class="panel-heading">空开配置</div>
                 <div class="panel-body">
                     <form class="form-horizontal" method="post" action="" role="form">
                         {% csrf_token %}
@@ -70,14 +69,13 @@
                         <div class="form-group">
                             <div class="col-xs-offset-3 col-sm-9">
                                 <button class="btn-primary btn" type="submit" >保存</button>
+                                <button class="btn-danger btn" >删除</button>
                             </div>
                         </div>
                     <form>
                 </div>
             </div>
-            
         </div>
     </div>
 </div>
 {% endblock %}
-      

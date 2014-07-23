@@ -4,6 +4,23 @@ from django.forms import ModelForm
 from models import *
 from django.forms import TextInput, DateInput, Select, Textarea, CheckboxInput,HiddenInput
 
+class AirSwitchForm(ModelForm):
+    class Meta:
+        model = AirSwitch
+        widgets = {
+            'name':TextInput(attrs={'class':'form-control'}),
+            'configuration':Select(attrs={'class':'form-control'}),
+            'total_count':TextInput(attrs={'class':'form-control'}),
+            'used_count':TextInput(attrs={'class':'form-control'}),
+            'switch_gear_cabinet':HiddenInput(attrs={'class':'form-control'}),
+            }
+        labels = {
+            'name':u'名称',
+            'configuration':u'空开配置',
+            'total_count':u'配置数量',
+            'used_count':u'已用数量',
+            'switch_gear_cabinet':u'电力柜',
+            }
 
 class SwitchGearCabinetForm(ModelForm):
     class Meta:
