@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import machine_room_list_view,machine_room_detail_view,machine_room_add_view,machine_room_advance_search_view,ups_add_view, ups_list_view, ups_detail_view, battery_add_view, battery_detail_view, battery_list_view 
+from views import * 
 
 urlpatterns = patterns(
     '',
@@ -16,4 +16,15 @@ urlpatterns = patterns(
     (r'^battery_detail/(?P<room_id>[0-9]+)/(?P<battery_id>[0-9]+)/$',battery_detail_view),
     (r'^battery_list/(?P<room_id>[0-9]+)/$',battery_list_view),
 
+    (r'^ac_add/(?P<room_id>[0-9]+)/$',ac_add_view),
+    (r'^ac_detail/(?P<room_id>[0-9]+)/(?P<ac_id>[0-9]+)/$',ac_detail_view),
+    (r'^ac_list/(?P<room_id>[0-9]+)/$',ac_list_view),
+
+    (r'^switch_gear_add/(?P<room_id>[0-9]+)/$',switch_gear_add_view),
+    (r'^column_head_add/(?P<room_id>[0-9]+)/$',column_head_add_view),
+    (r'^distribution_add/(?P<room_id>[0-9]+)/$',distribution_add_view),
+    (r'^switch_gear_detail/(?P<room_id>[0-9]+)/(?P<cabinet_id>[0-9]+)/$',switch_gear_detail_view),
+    (r'^column_head_detail/(?P<room_id>[0-9]+)/(?P<cabinet_id>[0-9]+)/$',column_head_detail_view),
+    (r'^distribution_detail/(?P<room_id>[0-9]+)/(?P<cabinet_id>[0-9]+)/$',distribution_detail_view),
+    (r'^power_cabinet_list/(?P<room_id>[0-9]+)/$',power_cabinet_list_view),
     )
