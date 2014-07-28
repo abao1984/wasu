@@ -1,12 +1,17 @@
 {% extends "object_base.html" %}
-{% block title %}机房管理－－新增机房资源{% endblock %}
+{% block title %}机房管理－－消防{% endblock %}
 {% block username %}developer{% endblock %}
 {% block pagehead %}
 <ol class="breadcrumb">
     <li>
     <a href="{% url "rmss.views.machine_room_list_view" %}">机房资源</a>
     </li>
-    <li class="active">{{room.room_id}}</li>
+    <li>
+    <a href="{% url "rmss.views.machine_room_detail_view" room.id %}">
+    {{room.room_id}}
+    </a>
+    </li>
+    <li class="active">消防</li>
 </ol>
 {% endblock %}
 
@@ -26,30 +31,30 @@
 <div class="tabbable tabs-right">
     <ul class="nav-tabs nav">
         <li><a href="{% url "rmss.views.machine_room_detail_view" room.id %}" >机房资源</a></li>
-        <li class="active"><a href="{% url "rmss.views.ups_list_view" room.id %}">UPS</a></li>
-        <li><a href="{% url "rmss.views.battery_list_view" room.id %}">电池组</a></li>
-        <li><a href="{% url "rmss.views.ac_list_view" room.id %}">空调</a></li>
+        <li class=""><a href="{% url "rmss.views.ups_list_view" room.id %}">UPS</a></li>
+        <li class=""><a href="{% url "rmss.views.battery_list_view" room.id %}">电池组</a></li>
+        <li class=""><a href="{% url "rmss.views.ac_list_view" room.id %}">空调</a></li>
         <li><a href="{% url "rmss.views.power_cabinet_list_view" room.id %}">电力设备</a></li>
-        <li><a href="{% url "rmss.views.monitor_list_view" room.id %}">监控</a></li>
-        <li><a href="{% url "rmss.views.entrance_guard_list_view" room.id %}">门禁</a></li>
-        <li><a href="{% url "rmss.views.fire_fight_list_view" room.id %}">消防</a></li>
+        <li class=""><a href="{% url "rmss.views.monitor_list_view" room.id %}">监控</a></li>
+        <li class=""><a href="{% url "rmss.views.entrance_guard_list_view" room.id %}">门禁</a></li>
+        <li class="active"><a href="{% url "rmss.views.fire_fight_list_view" room.id %}">消防</a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane active col-xs-10 pull-right">
             <div class="panel panel-default">
-                <div class="panel-heading">UPS资源
-                    <a href="{% url "rmss.views.ups_add_view" room.id %}" class="btn btn-xs btn-success pull-right">新增UPS资源</a>
+                <div class="panel-heading">消防
+                    <a href="{% url "rmss.views.fire_fight_add_view" room.id %}" class="btn btn-xs btn-success pull-right">新增消防</a>
                 </div>
                 <div class="panel-body">
                     {% ifequal items.count 0 %}
                     <div class="alert alert-info">
-                        目前没有数据，请<a href="{% url "rmss.views.ups_add_view" room.id %}">新增UPS资源</a>
+                        目前没有数据，请<a href="{% url "rmss.views.fire_fight_add_view" room.id %}">新增消防</a>
                     </div>
                     {% else %}                        
                     <ul class="list-group">
                         {% for item in items %}
                         <li class="list-group-item">
-                        <a href="{% url "rmss.views.ups_detail_view" room_id=room.id ups_id=item.id %}">
+                        <a href="{% url "rmss.views.fire_fight_detail_view" room_id=room.id fire_fight_id=item.id %}">
                             {{item.machine_room.name}}-{{item.name}}
                         </a>
                         </li> 

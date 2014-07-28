@@ -29,5 +29,17 @@ urlpatterns = patterns(
     (r'^power_cabinet_list/(?P<room_id>[0-9]+)/$',power_cabinet_list_view),
 
     (r'^airswitch_add/(?P<room_id>[0-9]+)/(?P<cabinet_id>[0-9]+)/$', airswitch_add_view),
-    (r'^airswitch_add/(?P<room_id>[0-9]+)/(?P<cabinet_id>[0-9]+)/(?P<airswitch_id>[0-9]+)/$', airswitch_detail_view),
+    (r'^airswitch_detail/(?P<room_id>[0-9]+)/(?P<cabinet_id>[0-9]+)/(?P<airswitch_id>[0-9]+)/$', airswitch_detail_view),
+
+    (r'^monitor_list/(?P<room_id>[0-9]+)/$', monitor_list_view),
+    (r'^monitor_add/(?P<room_id>[0-9]+)/$',monitor_add_view),
+    (r'^monitor_detail/(?P<room_id>[0-9]+)/(?P<monitor_id>[0-9]+)/$',monitor_detail_view),
+    
+    (r'^entrance_guard_list/(?P<room_id>[0-9]+)/$', entrance_guard_list_view),
+    (r'^entrance_guard_add/(?P<room_id>[0-9]+)/$',entrance_guard_add_view),
+    (r'^entrance_guard_detail/(?P<room_id>[0-9]+)/(?P<entrance_guard_id>[0-9]+)/$',entrance_guard_detail_view),
+
+    (r'^fire_fight_list/(?P<room_id>[0-9]+)/$', fire_fight_list_view),
+    (r'^fire_fight_add/(?P<room_id>[0-9]+)/$',fire_fight_add_view),
+    (r'^fire_fight_detail/(?P<room_id>[0-9]+)/(?P<fire_fight_id>[0-9]+)/$',fire_fight_detail_view),
     )

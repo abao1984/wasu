@@ -32,14 +32,12 @@
 <ul class="nav-tabs nav">
 <li><a href="{% url "rmss.views.machine_room_detail_view" room.id %}" >机房资源</a></li>
         <li class="active"><a href="{% url "rmss.views.ups_list_view" room.id %}">UPS</a></li>
-        <li><a href="">电池组</a></li>
-        <li><a href="">空调</a></li>
-        <li><a href="">开关柜</a></li>
-        <li><a href="">列头柜</a></li>
-        <li><a href="">配电柜</a></li>
-        <li><a href="">监控</a></li>
-        <li><a href="">门禁</a></li>
-        <li><a href="">消防</a></li>
+        <li><a href="{% url "rmss.views.battery_list_view" room.id %}">电池组</a></li>
+        <li><a href="{% url "rmss.views.ac_list_view" room.id %}">空调</a></li>
+        <li><a href="{% url "rmss.views.power_cabinet_list_view" room.id %}">电力设备</a></li>
+        <li><a href="{% url "rmss.views.monitor_list_view" room.id %}">监控</a></li>
+        <li><a href="{% url "rmss.views.entrance_guard_list_view" room.id %}">门禁</a></li>
+        <li><a href="{% url "rmss.views.fire_fight_list_view" room.id %}">消防</a></li>
 
 </ul>
 </div>

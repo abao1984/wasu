@@ -48,6 +48,7 @@ class Equipment(models.Model):
     phone = models.CharField(max_length=100)
     maintenance_cycles = models.CharField(max_length=100)
     maintenance_unit = models.CharField(max_length=100)
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default=ENABLE)
 
     is_monitoring = models.CharField(max_length=100, choices= MONIROTING_CHOICES,default=NO,blank=True)
 
@@ -61,7 +62,6 @@ class UPS(Equipment):
     gateway_address = models.CharField(max_length=100)
     netcard_sn = models.CharField(max_length=100)
     configuration = models.CharField(max_length=100)
-    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default=ENABLE)
     
     def __unicode__(self):
         return '%s %s' % (self.machine_room.name,self.name)
@@ -71,7 +71,6 @@ class Battery(Equipment):
     capacity = models.CharField(max_length=100)
     session_count = models.IntegerField()
     size = models.CharField(max_length=100)
-    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default=ENABLE)
     
     def __unicode__(self):
         return '%s %s' % (self.machine_room.name,self.name)
@@ -95,6 +94,7 @@ class AirSwitch(models.Model):
     total_count = models.IntegerField()
     used_count = models.IntegerField()
     switch_gear_cabinet = models.ForeignKey(SwitchGearCabinet)
+    remark = models.TextField(blank=True)
 
     def __unicode__(self):
         return '%s %s %s' % (self.gear.machine_room.name, self.gear.name,self.name)

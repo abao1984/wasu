@@ -1,9 +1,9 @@
 from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.template import Context, RequestContext
-from rmss.models import MachineRoom, UPS, Battery, AirConditioning,SwitchGearCabinet,ColumnHeadCabinet, DistributionCabinet, AirSwitch
+from rmss.models import * 
 from dig_paginator import DiggPaginator
 from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
-from rmss.admin import MachineRoomForm, UPSForm, BatteryForm,ACForm, SwitchGearCabinetForm,ColumnHeadCabinetForm, DistributionCabinetForm, AirSwitchForm
+from rmss.admin import * 
 from django.http import HttpResponse
 # Create your views here.
 def rmss_response(request,dic,template):
@@ -216,7 +216,8 @@ def column_head_detail_view(request, room_id, cabinet_id):
         if form.is_valid():
             cabinet = form.save()
             return redirect('rmss.views.power_cabinet_list_view', room_id)
-    return rmss_response(request, {'form':form, 'room':room,'cabinet_id':cabinet_id}, 'column_head_detail.html')
+    airswitch_list = AirSwitch.objects.filter(switch_gear_cabinet=cabinet)
+    return rmss_response(request, {'form':form, 'room':room,'cabinet_id':cabinet_id,'airswitch_list':airswitch_list}, 'column_head_detail.html')
 
 def distribution_add_view(request, room_id):
     room = get_object_or_404(MachineRoom, id=room_id)
@@ -246,7 +247,8 @@ def distribution_detail_view(request, room_id, cabinet_id):
         if form.is_valid():
             cabinet = form.save()
             return redirect('rmss.views.power_cabinet_list_view', room_id)
-    return rmss_response(request, {'form':form, 'room':room,'cabinet_id':cabinet_id}, 'distribution_detail.html')
+    airswitch_list = AirSwitch.objects.filter(switch_gear_cabinet=cabinet)
+    return rmss_response(request, {'form':form, 'room':room,'cabinet_id':cabinet_id,'airswitch_list':airswitch_list}, 'distribution_detail.html')
 
 def airswitch_add_view(request, room_id, cabinet_id):
     room = get_object_or_404(MachineRoom, id=room_id)
@@ -280,4 +282,97 @@ def airswitch_detail_view(request, room_id, cabinet_id, airswitch_id):
             return redirect('rmss.views.switch_gear_detail_view', room.id,cabinet_id)
     return rmss_response(request,{'form':form,'room':room, 'cabinet':cabinet}, 'airswitch_detail.html')
         
-        
+def monitor_list_view(request, room_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    items = MonitorEquipment.objects.filter(machine_room=room)
+    return rmss_response(request, {'room':room,'items':items},'monitor_list.html')
+
+def monitor_add_view(request, room_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    form = MonitorEquipmentForm()
+    if request.POST:
+        default_data = request.POST.copy()
+        default_data['machine_room'] = room_id
+        instance = MonitorEquipment()
+        form = MonitorEquipmentForm(default_data, instance=instance)
+        if form.is_valid():
+            monitor = form.save()
+            return redirect('rmss.views.monitor_list_view', room_id=room_id)
+    return rmss_response(request, {'form':form, 'room':room}, 'monitor_add.html')
+
+def monitor_detail_view(request, room_id, monitor_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    monitor = get_object_or_404(MonitorEquipment, id=monitor_id)
+    form = MonitorEquipmentForm(instance=monitor)
+    if request.POST:
+        default_data = request.POST.copy()
+        default_data['machine_room'] = room_id
+        form = MonitorEquipmentForm(default_data, instance=monitor)
+        if form.is_valid():
+            monitor = form.save()
+            return redirect('rmss.views.monitor_list_view', room_id=room_id)
+    return rmss_response(request, {'form':form, 'room':room, 'monitor':monitor}, 'monitor_detail.html')
+
+def entrance_guard_list_view(request, room_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    items = EntranceGuardEquipment.objects.filter(machine_room=room)
+    return rmss_response(request, {'room':room, 'items':items},'entrance_guard_list.html')
+
+def entrance_guard_add_view(request, room_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    form = EntranceGuardEquipmentForm()
+    if request.POST:
+        default_data = request.POST.copy()
+        default_data['machine_room'] = room_id
+        instance = EntranceGuardEquipment()
+        form = EntranceGuardEquipmentForm(default_data, instance=instance)
+        if form.is_valid():
+            eg = form.save()
+            return redirect('rmss.views.entrance_guard_list_view', room_id=room_id)
+    return rmss_response(request, {'form':form, 'room':room}, 'entrance_guard_add.html')
+
+def entrance_guard_detail_view(request, room_id,entrance_guard_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    eg = get_object_or_404(EntranceGuardEquipment, id=entrance_guard_id)
+    form = EntranceGuardEquipmentForm(instance=eg)
+    if request.POST:
+        default_data = request.POST.copy()
+        default_data['machine_room'] = room_id
+        form  = EntranceGuardEquipmentForm(default_data, instance=eg)
+        if form.is_valid():
+            eg = form.save()
+            return redirect('rmss.views.entrance_guard_list_view', room_id=room_id)
+    return rmss_response(request, {'form':form, 'room':room, 'entrance_guard':eg}, 'entrance_guard_detail.html')
+
+def fire_fight_list_view(request, room_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    items = FirefightingEquipment.objects.filter(machine_room=room)
+    return rmss_response(request, {'room':room, 'items':items}, 'fire_fight_list.html')
+
+def fire_fight_add_view(request, room_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    form = FirefightingEquipmentForm()
+    if request.POST:
+        default_data = request.POST.copy()
+        default_data['machine_room'] = room_id
+        instance = FirefightingEquipment()
+        form = FirefightingEquipmentForm(default_data, instance=instance)
+        if form.is_valid():
+            fire_fight = form.save()
+            return redirect('rmss.views.fire_fight_list_view', room_id=room_id)
+    return rmss_response(request, {'form':form, 'room':room}, 'fire_fight_add.html')
+
+def fire_fight_detail_view(request, room_id, fire_fight_id):
+    room = get_object_or_404(MachineRoom, id=room_id)
+    ff = get_object_or_404(FirefightingEquipment, id=fire_fight_id)
+    form = FirefightingEquipmentForm(instance=ff)
+    if request.POST:
+        default_data = request.POST.copy()
+        default_data['machine_room'] =room_id
+        form = FirefightingEquipmentForm(default_data, instance=ff)
+        if form.is_valid():
+            ff = form.save()
+            return redirect('rmss.views.fire_fight_list_view', room_id=room_id)
+    return rmss_response(request, {'room':room, 'form':form, 'fire_fight':ff}, 'fire_fight_detail.html')
+
+            

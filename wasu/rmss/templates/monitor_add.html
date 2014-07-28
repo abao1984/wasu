@@ -1,5 +1,5 @@
 {% extends "object_base.html" %}
-{% block title %}机房管理－－新增开关柜{% endblock %}
+{% block title %}机房管理－－新增监控{% endblock %}
 {% block username %}developer{% endblock %}
 {% block pagehead %}
 <ol class="breadcrumb">
@@ -11,7 +11,7 @@
         {{room.room_id}}
     </a>
     </li>
-    <li class="active">新增开关柜</li>
+    <li class="active">新增监控</li>
 </ol>
 {% endblock %}
 
@@ -34,15 +34,15 @@
         <li class=""><a href="{% url "rmss.views.ups_list_view" room.id %}">UPS</a></li>
         <li class=""><a href="{% url "rmss.views.battery_list_view" room.id %}">电池组</a></li>
         <li class=""><a href="{% url "rmss.views.ac_list_view" room.id %}">空调</a></li>
-        <li class="active"><a href="{% url "rmss.views.power_cabinet_list_view" room.id %}">电力设备</a></li>
-        <li><a href="{% url "rmss.views.monitor_list_view" room.id %}">监控</a></li>
+        <li><a href="{% url "rmss.views.power_cabinet_list_view" room.id %}">电力设备</a></li>
+        <li class="active"><a href="{% url "rmss.views.monitor_list_view" room.id %}">监控</a></li>
         <li><a href="{% url "rmss.views.entrance_guard_list_view" room.id %}">门禁</a></li>
         <li><a href="{% url "rmss.views.fire_fight_list_view" room.id %}">消防</a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane active col-xs-10 pull-right">
             <div class="panel panel-default">
-                <div class="panel-heading">开关柜</div>
+                <div class="panel-heading">监控</div>
                 <div class="panel-body">
                     <form class="form-horizontal" method="post" action="" role="form">
                         {% csrf_token %}
@@ -73,9 +73,7 @@
                     <form>
                 </div>
             </div>
-            
         </div>
     </div>
 </div>
 {% endblock %}
-      

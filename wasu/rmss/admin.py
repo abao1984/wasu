@@ -4,15 +4,96 @@ from django.forms import ModelForm
 from models import *
 from django.forms import TextInput, DateInput, Select, Textarea, CheckboxInput,HiddenInput
 
+class FirefightingEquipmentForm(ModelForm):
+    class Meta:
+        model = FirefightingEquipment
+        widgets = {
+            'start_date':TextInput(attrs={'class':'form-control'}),
+            'is_started':HiddenInput(attrs={'class':'form-control'}),
+            'manufacturer':TextInput(attrs={'class':'form-control'}),
+            'specification':TextInput(attrs={'class':'form-control'}),
+            'code':TextInput(attrs={'class':'form-control'}),
+            'status':Select(attrs={'class':'form-control'}),
+            'name':TextInput(attrs={'class':'form-control'}),
+            'install_date':TextInput(attrs={'class':'form-control'}),
+            'asset_id':TextInput(attrs={'class':'form-control'}),
+            'equipment_life':TextInput(attrs={'class':'form-control'}),
+            'phone':TextInput(attrs={'class':'form-control'}),
+            'maintenance_cycles':TextInput(attrs={'class':'form-control'}),
+            'maintenance_unit':TextInput(attrs={'class':'form-control'}),
+            'is_monitoring':Select(attrs={'class':'form-control'}),
+            'machine_room':HiddenInput(attrs={'class':'form-control'}),
+
+                }
+        labels = {
+            'start_date':u'启动日期',
+            'is_started':u'设备厂家',
+            'manufacturer':u'设备厂家',
+            'specification':u'规格型号',
+            'code':u'消防编号',
+            'name':u'消防名称',
+            'install_date':u'安装日期',
+            'asset_id':u'资产编号',
+            'equipment_life':u'设备使用年限',
+            'phone':u'厂家联系电话',
+            'maintenance_cycles':u'维保周期',
+            'maintenance_unit':u'代维单位',
+            'is_monitoring':u'是否监控',
+            'machine_room':u'机房',
+            'status':u'消防状态'
+        }
+
+
+class EntranceGuardEquipmentForm(ModelForm):
+    class Meta:
+        model = MonitorEquipment
+        widgets = {
+            'start_date':TextInput(attrs={'class':'form-control'}),
+            'is_started':HiddenInput(attrs={'class':'form-control'}),
+            'manufacturer':TextInput(attrs={'class':'form-control'}),
+            'specification':TextInput(attrs={'class':'form-control'}),
+            'code':TextInput(attrs={'class':'form-control'}),
+            'status':Select(attrs={'class':'form-control'}),
+            'name':TextInput(attrs={'class':'form-control'}),
+            'install_date':TextInput(attrs={'class':'form-control'}),
+            'asset_id':TextInput(attrs={'class':'form-control'}),
+            'equipment_life':TextInput(attrs={'class':'form-control'}),
+            'phone':TextInput(attrs={'class':'form-control'}),
+            'maintenance_cycles':TextInput(attrs={'class':'form-control'}),
+            'maintenance_unit':TextInput(attrs={'class':'form-control'}),
+            'is_monitoring':Select(attrs={'class':'form-control'}),
+            'machine_room':HiddenInput(attrs={'class':'form-control'}),
+
+                }
+        labels = {
+            'start_date':u'启动日期',
+            'is_started':u'设备厂家',
+            'manufacturer':u'设备厂家',
+            'specification':u'规格型号',
+            'code':u'门禁编号',
+            'name':u'门禁名称',
+            'install_date':u'安装日期',
+            'asset_id':u'资产编号',
+            'equipment_life':u'设备使用年限',
+            'phone':u'厂家联系电话',
+            'maintenance_cycles':u'维保周期',
+            'maintenance_unit':u'代维单位',
+            'is_monitoring':u'是否监控',
+            'machine_room':u'机房',
+            'status':u'门禁状态'
+        }
+
+
 class MonitorEquipmentForm(ModelForm):
     class Meta:
         model = MonitorEquipment
         widgets = {
             'start_date':TextInput(attrs={'class':'form-control'}),
-            'is_started':TextInput(attrs={'class':'form-control'}),
+            'is_started':HiddenInput(attrs={'class':'form-control'}),
             'manufacturer':TextInput(attrs={'class':'form-control'}),
             'specification':TextInput(attrs={'class':'form-control'}),
             'code':TextInput(attrs={'class':'form-control'}),
+            'status':Select(attrs={'class':'form-control'}),
             'name':TextInput(attrs={'class':'form-control'}),
             'install_date':TextInput(attrs={'class':'form-control'}),
             'asset_id':TextInput(attrs={'class':'form-control'}),
@@ -38,6 +119,7 @@ class MonitorEquipmentForm(ModelForm):
             'maintenance_unit':u'代维单位',
             'is_monitoring':u'是否监控',
             'machine_room':u'机房',
+            'status':u'监控状态'
         }
 
 class AirSwitchForm(ModelForm):
@@ -49,6 +131,7 @@ class AirSwitchForm(ModelForm):
             'total_count':TextInput(attrs={'class':'form-control'}),
             'used_count':TextInput(attrs={'class':'form-control'}),
             'switch_gear_cabinet':HiddenInput(attrs={'class':'form-control'}),
+            'remark':Textarea(attrs={'class':'form-control','rows':'3'}),
             }
         labels = {
             'name':u'名称',
@@ -108,10 +191,97 @@ class SwitchGearCabinetForm(ModelForm):
 class ColumnHeadCabinetForm(SwitchGearCabinetForm):
     class Meta:
         model = ColumnHeadCabinet
+        widgets = {
+                'name':TextInput(attrs={'class':'form-control'}),
+                'start_date':TextInput(attrs={'class':'form-control'}),
+                'is_started':HiddenInput(attrs={'class':'form-control'}),
+                'manufacturer':TextInput(attrs={'class':'form-control'}),
+                'specification':TextInput(attrs={'class':'form-control'}),
+                'code':TextInput(attrs={'class':'form-control'}),
+                'install_date':TextInput(attrs={'class':'form-control'}),
+                'asset_id':TextInput(attrs={'class':'form-control'}),
+                'equipment_life':TextInput(attrs={'class':'form-control'}),
+                'phone':TextInput(attrs={'class':'form-control'}),
+                'maintenance_cycles':TextInput(attrs={'class':'form-control'}),
+                'maintenance_unit':TextInput(attrs={'class':'form-control'}),
+                'is_monitoring':Select(attrs={'class':'form-control'}),
+                'machine_room':HiddenInput(attrs={'class':'form-control'}),
+
+                'power_supply':Select(attrs={'class':'form-control'}),
+                'oil_machine_interface':Select(attrs={'class':'form-control'}),
+                'lightning_protection':Select(attrs={'class':'form-control'}),
+                'ammeter':Select(attrs={'class':'form-control'}),
+                'ammeter_magnification':TextInput(attrs={'class':'form-control'}),
+                }
+        labels = {
+                'name':u'名称',
+                'start_date':u'启用日期',
+                'is_started':u'是否启用',
+                'manufacturer':u'设备厂家',
+                'specification':u'规格型号',
+                'code':u'编号',
+                'install_date':u'安装日期',
+                'asset_id':u'资产编号',
+                'equipment_life':u'设备使用年限',
+                'phone':u'厂家联系电话',
+                'maintenance_cycles':u'维保周期',
+                'maintenance_unit':u'代维单位',
+                'is_monitoring':u'是否监控',
+                'machine_room':u'所属机房',
+                'power_supply':u'供电方式',
+                'oil_machine_interface':u'油机接口',
+                'lightning_protection':u'防雷器',
+                'ammeter':u'电表',
+                'ammeter_magnification':u'电表倍率',
+                }
 
 class DistributionCabinetForm(SwitchGearCabinetForm):
     class Meta:
         model = DistributionCabinet
+        widgets = {
+                'name':TextInput(attrs={'class':'form-control'}),
+                'start_date':TextInput(attrs={'class':'form-control'}),
+                'is_started':HiddenInput(attrs={'class':'form-control'}),
+                'manufacturer':TextInput(attrs={'class':'form-control'}),
+                'specification':TextInput(attrs={'class':'form-control'}),
+                'code':TextInput(attrs={'class':'form-control'}),
+                'install_date':TextInput(attrs={'class':'form-control'}),
+                'asset_id':TextInput(attrs={'class':'form-control'}),
+                'equipment_life':TextInput(attrs={'class':'form-control'}),
+                'phone':TextInput(attrs={'class':'form-control'}),
+                'maintenance_cycles':TextInput(attrs={'class':'form-control'}),
+                'maintenance_unit':TextInput(attrs={'class':'form-control'}),
+                'is_monitoring':Select(attrs={'class':'form-control'}),
+                'machine_room':HiddenInput(attrs={'class':'form-control'}),
+
+                'power_supply':Select(attrs={'class':'form-control'}),
+                'oil_machine_interface':Select(attrs={'class':'form-control'}),
+                'lightning_protection':Select(attrs={'class':'form-control'}),
+                'ammeter':Select(attrs={'class':'form-control'}),
+                'ammeter_magnification':TextInput(attrs={'class':'form-control'}),
+                }
+        labels = {
+                'name':u'名称',
+                'start_date':u'启用日期',
+                'is_started':u'是否启用',
+                'manufacturer':u'设备厂家',
+                'specification':u'规格型号',
+                'code':u'编号',
+                'install_date':u'安装日期',
+                'asset_id':u'资产编号',
+                'equipment_life':u'设备使用年限',
+                'phone':u'厂家联系电话',
+                'maintenance_cycles':u'维保周期',
+                'maintenance_unit':u'代维单位',
+                'is_monitoring':u'是否监控',
+                'machine_room':u'所属机房',
+                'power_supply':u'供电方式',
+                'oil_machine_interface':u'油机接口',
+                'lightning_protection':u'防雷器',
+                'ammeter':u'电表',
+                'ammeter_magnification':u'电表倍率',
+                }
+
 
 class ACForm(ModelForm):
     class Meta:
@@ -255,7 +425,7 @@ class MachineRoomForm(ModelForm):
                 'address':TextInput(attrs={'class':'form-control'}),
                 'cover_range':Textarea(attrs={'class':'form-control','rows':'3'}),
 #                'is_all_net':CheckboxInput(attrs={'class':'form-control'}),
-'remark':Textarea(attrs={'class':'form-control', 'rows':'3'}),
+                'remark':Textarea(attrs={'class':'form-control', 'rows':'3'}),
                 'phone':TextInput(attrs={'class':'form-control'}),
                 'room_status':Select(attrs={'class':'form-control'}),
                 'start_date':DateInput(attrs={'class':'form-control'}),

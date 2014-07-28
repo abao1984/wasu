@@ -1,5 +1,5 @@
 {% extends "object_base.html" %}
-{% block title %}机房管理－－新增开关柜{% endblock %}
+{% block title %}机房管理－－新增配电柜{% endblock %}
 {% block username %}developer{% endblock %}
 {% block pagehead %}
 <ol class="breadcrumb">
@@ -11,7 +11,7 @@
         {{room.room_id}}
     </a>
     </li>
-    <li class="active">新增开关柜</li>
+    <li class="active">新增配电柜</li>
 </ol>
 {% endblock %}
 
@@ -42,7 +42,7 @@
     <div class="tab-content">
         <div class="tab-pane active col-xs-10 pull-right">
             <div class="panel panel-default">
-                <div class="panel-heading">开关柜</div>
+                <div class="panel-heading">配电柜</div>
                 <div class="panel-body">
                     <form class="form-horizontal" method="post" action="" role="form">
                         {% csrf_token %}
@@ -56,9 +56,9 @@
                                 {{field}}
                                 {% if field.errors %}
                                 <small class="help-block text-warning" >
-                                {% for error in field.errors %}
+                                    {% for error in field.errors %}
                                     {{error}}
-                                {% endfor %}
+                                    {% endfor %}
                                 </small>
                                 {% endif %}
                             </div>
@@ -70,12 +70,11 @@
                                 <button class="btn-primary btn" type="submit" >保存</button>
                             </div>
                         </div>
-                    <form>
+                        <form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
         </div>
-    </div>
-</div>
-{% endblock %}
-      
+        {% endblock %}
+
