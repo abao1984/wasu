@@ -1,5 +1,6 @@
 from django.db import models
 from wasu.settings import *
+from django.contrib.auth.models import User
 # Create your models here.
 class Selection(models.Model):
     name = models.CharField(max_length=100)
@@ -116,3 +117,32 @@ class FirefightingEquipment(Equipment):
 
 class Client(models.Model):
     pass
+
+class AbstractIP(models.Model):
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='child')
+
+    class Meta:
+        abstract = True
+
+class MyUser(models.Model):
+    user = models.OneToOneField(User) 
+    department = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.username
+
+class IPAddress(AbstractIP):
+    address = models.IPAddressField(max_length=100)
+    subnet_mask = models.IPAddressField(max_length=100) 
+    machine_room = models.ForeignKey('MachineRoom',blank=True,null=True)
+    remark = models.TextField(blank=True)
+    bussiness_type = models.ForeignKey('IPBussinessType', blank=True, null=True)
+    status = models.CharField(max_length=20)
+    record_user = models.ForeignKey('MyUser', related_name='record_user')
+    record_date = models.DateField(auto_now=True, auto_now_add=True)
+    change_user = models.ForeignKey('MyUser', related_name='change_user')
+    change_date = models.DateField()
+
+    def __unicode__(self):
+        return self.address
+    
