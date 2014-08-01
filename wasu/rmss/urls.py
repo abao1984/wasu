@@ -42,4 +42,8 @@ urlpatterns = patterns(
     (r'^fire_fight_list/(?P<room_id>[0-9]+)/$', fire_fight_list_view),
     (r'^fire_fight_add/(?P<room_id>[0-9]+)/$',fire_fight_add_view),
     (r'^fire_fight_detail/(?P<room_id>[0-9]+)/(?P<fire_fight_id>[0-9]+)/$',fire_fight_detail_view),
+
+#    (r'^machine_room_search/$',machine_room_search_view),
+    (r'^ip_add/$',ip_add_view),
+
     )

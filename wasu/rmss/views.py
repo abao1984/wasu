@@ -5,6 +5,8 @@ from dig_paginator import DiggPaginator
 from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
 from rmss.admin import * 
 from django.http import HttpResponse
+from django.core import serializers
+import simplejson
 # Create your views here.
 def rmss_response(request,dic,template):
     return render_to_response(template,dic,context_instance=RequestContext(request))
@@ -375,4 +377,34 @@ def fire_fight_detail_view(request, room_id, fire_fight_id):
             return redirect('rmss.views.fire_fight_list_view', room_id=room_id)
     return rmss_response(request, {'room':room, 'form':form, 'fire_fight':ff}, 'fire_fight_detail.html')
 
-            
+def machine_room_search_view(request):
+    rooms = MachineRoom.objects.all()
+    data = serializers.serialize('json', rooms, ensure_ascii=False, indent=4,separators=(',\n', ':'), fields=('room_id','name','room_type'))
+#    json_str = simplejson.dumps(data,ensure_ascii=False, indent=4,separators=(',\n',':'))
+    return HttpResponse(data, content_type="application/json")
+
+def ip_add_view(request):
+    form = IPAddressForm()
+    if request.POST:
+        default_data = request.POST.copy()
+        form = IPAddressForm(default_data)
+        default_data['record_user'] = request.user
+        if form.is_valid():
+            ip = form.save()
+            return redirect('rmss.views.ip_list_view')
+    return rmss_response(request, {'form':form}, 'ip_add.html')
+
+def ip_detail_view(request,ip_id):
+    ip = get_object_or_404(IPAddress, id=ip_id)
+    form = IPAddressForm(instance=ip)
+    if request.POST:
+        default_data = request.POST.copy()
+        default_data['change_user'] = request.user
+        form = IPAddressForm(default_data,instance=ip) 
+        if form.is_valid():
+            ip = form.save()
+            return redirect('rmss.views.ip_list_view')
+    return rmss_response(request, {'form':form, 'ip':ip},ip_detail.html)
+
+def ip_list_view(request):
+    pass

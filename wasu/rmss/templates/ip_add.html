@@ -1,0 +1,147 @@
+{% extends "object_base.html" %}
+{% block title %}新增IP地址{% endblock %}
+{% block username %}developer{% endblock %}
+{% block pagehead %}
+<h3>新增IP地址</h3>
+{% endblock %}
+
+{% block pageleft %}
+{% endblock %}
+
+{% block pageright %}
+<div class="panel panel-default">
+<div class="panel-heading">新增IP地址</div>
+<div class="panel-body">
+<form id="form1" action="" role="form" method="post" class="form-horizontal">
+    {% csrf_token %}
+    {% for field in form %}
+    {% if field.is_hidden %}
+    {{field}}
+    {% else %}
+    <div class="form-group">
+        {% ifequal field.name "machine_room" %}
+        <label for="id_{{field.name}}" class="col-xs-2 control-label">{{field.label}}</label>
+        <div class="col-xs-5">
+           <div class="input-group">
+           <input type="text" class="form-control" id="id_machine_room_title" />
+           <span class="input-group-btn">
+           <button class="btn-default btn" type="button" data-toggle="modal" data-target="#myModal">浏览..</button>
+           </span>
+           </div>
+        <input type="hidden" name="machine_room" id="id_machine_room" />
+        </div> 
+        {% else %}
+        <label for="id_{{field.name}}" class="col-xs-2 control-label">{{field.label}}</label>
+        <div class="col-xs-5">
+            {{field}}
+            {% if field.errors %}
+            <small class="help-block text-warning">
+                {% for error in field.errors %}
+                    {{error}}
+                {% endfor %}
+            </small>
+            {% endif %}
+        </div>
+        {% endifequal %}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-7">
+            <button class="btn-primary btn" type="submit">保存</button>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">所属机房选择</h4>
+    </div>
+    <div class="modal-body">
+    <div class="search-fields">
+       <form action="" class="form-inline" role="form" id="form2">
+       <div class="form-group">
+       <label for="id_search_room_id" class="sr-only">机房编号</label>
+       <input type="text" id="id_search_room_id" name="room_id" class="form-control" placeholder="机房编号">
+       </div>
+       <div class="form-group">
+       <label for="id_search_room_name" class="sr-only">机房名称</label>
+       <input type="text" id="id_search_room_name" name="room_name" class="form-control" placeholder="机房名称">
+       </div>
+       <div class="form-group">
+       <label for="id_search_area" class="sr-only">所属区域</label>
+       <input type="text" id="id_search_area" name="room_area" class="form-control" placeholder="所属区域">
+       </div>
+       <div class="form-group">
+       <label for="id_search_room_status" class="sr-only">机房状态</label>
+       <input type="text" id="id_search_room_status" name="room_status" class="form-control" placeholder="机房状态">
+       </div>
+       <button class="btn-primary btn" type="button">查询</button>
+       </form> 
+    </div>
+    <hr>
+    <div class="list-fields">
+    <table id="id_machine_room_table" class="table table-hover">
+        <tr>
+        <th>选择</th>
+        <th>机房编号</th>
+        <th>机房名称</th>
+        <th>所属区域</th>
+        <th>机房类型</th>
+        <th>机房状态</th>
+        </tr>
+    </table>
+    </div>
+    </div>
+    <div class="modal-footer">
+    <button class="btn-default btn" data-dissmiss="modal" type="button" id="select_room_button">确定</button>
+    </div>
+    </div>
+    </div>
+    </div>
+</form>
+</div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript">
+$(function(){
+    $('#select_room_button').click(function(){
+        var node = $('input[name="machine_room_radio"]:checked')
+        var room_pk = $('input[name="machine_room_radio"]:checked').val();
+        var td_list = node.parent().parent().children();
+        var room_id = td_list[1].textContent;
+        var room_name = td_list[2].textContent;
+        $('#id_machine_room').val(room_pk);
+        $('#id_machine_room_title').val('[' + room_id + ']-' + room_name);
+        });
+
+    $.getJSON('{% url "api_dispatch_list" resource_name="machine_room" api_name="v1" %}?format=json', function(data){
+        var data_list = data['objects']
+        $.each(data_list, function(index, value){
+        var id = value.id;
+        var room_id = value.room_id;
+        var room_name = value.name;
+        var room_type = value.room_type.name;
+        var room_status = value.room_status;
+        var room_area = value.area.name;
+        var html_str = '' +
+        '<tr>' +
+        '<td><input type="radio" class="checkbox-like" name="machine_room_radio" value="'+id+'"></td>' +
+        	'<td>'+ room_id +'</td>' +
+        	'<td>'+ room_name +'</td>' +
+        	'<td>'+ room_area +'</td>' +
+        	'<td>'+ room_type +'</td>' +
+        	'<td>'+ room_status +'</td>' +
+        '</tr>'; 
+        $('#id_machine_room_table').append(html_str); 
+        }); 
+    }); 
+});
+
+</script>
+{% endblock %}

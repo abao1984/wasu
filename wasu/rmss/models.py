@@ -10,6 +10,9 @@ class Selection(models.Model):
 
 class MachineRoomType(Selection):
     pass
+    
+    def __unicode__(self):
+        return self.name
 
 class MachineRoomUsage(Selection):
     pass
@@ -130,6 +133,8 @@ class MyUser(models.Model):
 
     def __unicode__(self):
         return self.username
+class IPBussinessType(Selection):
+    pass
 
 class IPAddress(AbstractIP):
     address = models.IPAddressField(max_length=100)
@@ -137,11 +142,12 @@ class IPAddress(AbstractIP):
     machine_room = models.ForeignKey('MachineRoom',blank=True,null=True)
     remark = models.TextField(blank=True)
     bussiness_type = models.ForeignKey('IPBussinessType', blank=True, null=True)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=ENABLE)
+    max_host_count = models.IntegerField()
     record_user = models.ForeignKey('MyUser', related_name='record_user')
     record_date = models.DateField(auto_now=True, auto_now_add=True)
-    change_user = models.ForeignKey('MyUser', related_name='change_user')
-    change_date = models.DateField()
+    change_user = models.ForeignKey('MyUser', related_name='change_user',blank=True,null=True)
+    change_date = models.DateField(auto_now=True, auto_now_add=True)
 
     def __unicode__(self):
         return self.address

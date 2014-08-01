@@ -4,6 +4,34 @@ from django.forms import ModelForm
 from models import *
 from django.forms import TextInput, DateInput, Select, Textarea, CheckboxInput,HiddenInput
 
+class IPAddressForm(ModelForm):
+    class Meta:
+        model = IPAddress
+        widgets = {
+            'address':TextInput(attrs={'class':'form-control'}),
+            'subnet_mask':TextInput(attrs={'class':'form-control'}),
+            'machine_room':TextInput(attrs={'class':'form-control'}),
+            'bussiness_type':Select(attrs={'class':'form-control'}),
+            'status':Select(attrs={'class':'form-control'}),
+            'record_user':HiddenInput(attrs={'class':'form-control'}),
+            'record_date':HiddenInput(attrs={'class':'form-control'}),
+            'change_user':HiddenInput(attrs={'class':'form-control'}),
+            'change_date':HiddenInput(attrs={'class':'form-control'}),
+            'max_host_count':HiddenInput(attrs={'class':'form-control'}),
+            'parent':HiddenInput(attrs={'class':'form-control'}),
+            'remark':Textarea(attrs={'class':'form-control','rows':'3'}),
+                }
+        labels = {
+            'address':u'IP地址',
+            'subnet_mask':u'子网掩码',
+            'remark':u'备注',
+            'bussiness_type':u'业务类型',
+            'status':u'是否启用',
+            'max_host_count':u'最大主机数',
+            'parent':u'上级IP地址',
+            'machine_room':u'所属机房',
+                }
+
 class FirefightingEquipmentForm(ModelForm):
     class Meta:
         model = FirefightingEquipment
@@ -458,4 +486,6 @@ admin.site.register(DistributionCabinet)
 admin.site.register(MonitorEquipment)
 admin.site.register(EntranceGuardEquipment)
 admin.site.register(FirefightingEquipment)
+admin.site.register(IPAddress)
+admin.site.register(IPBussinessType)
 
