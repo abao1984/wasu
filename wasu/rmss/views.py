@@ -24,7 +24,7 @@ def machine_room_detail_view(request,id):
 def machine_room_list_view(request):
     page = request.GET.get('page','1')
     item_list = MachineRoom.objects.all()
-    paginator = DiggPaginator(item_list,10,body=5, padding=2)
+    paginator = DiggPaginator(item_list,20,body=5, padding=2)
     try:
         rooms = paginator.page(page)
     except PageNotAnInteger:
@@ -388,14 +388,16 @@ def ip_add_view(request):
     if request.POST:
         default_data = request.POST.copy()
         form = IPAddressForm(default_data)
-        default_data['record_user'] = request.user
+        user = request.user
+        record_user = get_object_or_404(MyUser, user=user)
+        default_data['record_user'] = record_user.id 
         if form.is_valid():
             ip = form.save()
             return redirect('rmss.views.ip_list_view')
     return rmss_response(request, {'form':form}, 'ip_add.html')
 
-def ip_detail_view(request,ip_id):
-    ip = get_object_or_404(IPAddress, id=ip_id)
+def ip_detail_view(request,id):
+    ip = get_object_or_404(IPAddress, id=id)
     form = IPAddressForm(instance=ip)
     if request.POST:
         default_data = request.POST.copy()
@@ -404,7 +406,22 @@ def ip_detail_view(request,ip_id):
         if form.is_valid():
             ip = form.save()
             return redirect('rmss.views.ip_list_view')
-    return rmss_response(request, {'form':form, 'ip':ip},ip_detail.html)
+    return rmss_response(request, {'form':form, 'ip':ip},'ip_detail.html')
+
+def ip_advance_search_view(request):
+    pass
 
 def ip_list_view(request):
-    pass
+    page = request.GET.get('page','1')
+    item_list = IPAddress.objects.all()
+    paginator = DiggPaginator(item_list,20,body=5, padding=2)
+    try:
+        rooms = paginator.page(page)
+    except PageNotAnInteger:
+        rooms = paginator.page(1)
+    except EmptyPage:
+        rooms = paginator.page(paginator.num_pages)
+    return rmss_response(request, {'items':rooms}, 'ip_list.html')  
+
+def device_template_add_view(request):
+    pass  

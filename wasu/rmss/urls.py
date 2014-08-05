@@ -45,5 +45,8 @@ urlpatterns = patterns(
 
 #    (r'^machine_room_search/$',machine_room_search_view),
     (r'^ip_add/$',ip_add_view),
+    (r'^ip_list/$',ip_list_view),
+    (r'^ip_detail/(?P<id>[0-9]+)/$',ip_detail_view),
+    (r'^ip_advance_search_view/$',ip_advance_search_view),
 
     )

@@ -132,7 +132,8 @@ class MyUser(models.Model):
     department = models.CharField(max_length=100)
 
     def __unicode__(self):
-        return self.username
+        return self.user.username
+
 class IPBussinessType(Selection):
     pass
 
@@ -151,4 +152,65 @@ class IPAddress(AbstractIP):
 
     def __unicode__(self):
         return self.address
+   
+class DeviceType(Selection):
+    pass
+
+    def __unicode__(self):
+        return self.name
+
+class SlotType(Selection):
+    pass
+
+    def __unicode__(self):
+        return self.name
+
+class PortType(Selection):
+    pass
+
+    def __unicode__(self):
+        return self.name
+
+class PortSpeed(Selection):
+    pass
     
+    def __unicode__(self):
+        return self.name
+
+class DeviceTemplate(models.Model):
+    name = models.CharField(max_length=100)
+    device_type = models.ForeignKey('DeviceType')
+    model_name = models.CharField(max_length=100)
+    has_slot = models.BooleanField()
+    slot_count = models.IntegerField()
+    port_count = models.IntegerField()
+
+    def __unicode__(self):
+        return self.name
+
+class AbstractSlotInfo(models.Model):
+    parent = models.ForeignKey('self', blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+class SlotInfo(models.Model):
+    slot_type = models.ForeignKey('SlotType')
+    is_used = models.BooleanField()
+    card_model = models.CharField(max_length=100)
+    slot_number = models.IntegerField()
+    device_template = models.ForeignKey('DeviceTemplate')
+
+    def __unicode__(slef):
+        return '%s-%s' %(self.device_template.name,self.slot_number)
+
+class PortInfo(models.Model):
+    is_used = models.BooleanField()
+    speed = models.ForeignKey('PortSpeed')
+    port_type = models.ForeignKey('PortType')
+    is_multiply ＝ models.BooleanField()
+    port_number = models.IntegerField()
+    device_template = models.ForeignKey('DeviceTemplate')
+
+    def __unicode__(self):
+        return '%s-%s' % (self.device_template.name, self.port_number)

@@ -17,7 +17,7 @@ class IPAddressForm(ModelForm):
             'record_date':HiddenInput(attrs={'class':'form-control'}),
             'change_user':HiddenInput(attrs={'class':'form-control'}),
             'change_date':HiddenInput(attrs={'class':'form-control'}),
-            'max_host_count':HiddenInput(attrs={'class':'form-control'}),
+            'max_host_count':TextInput(attrs={'class':'form-control'}),
             'parent':HiddenInput(attrs={'class':'form-control'}),
             'remark':Textarea(attrs={'class':'form-control','rows':'3'}),
                 }
@@ -488,4 +488,5 @@ admin.site.register(EntranceGuardEquipment)
 admin.site.register(FirefightingEquipment)
 admin.site.register(IPAddress)
 admin.site.register(IPBussinessType)
+admin.site.register(MyUser)
 
