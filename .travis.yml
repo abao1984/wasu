@@ -9,7 +9,7 @@ before_install:
     - "sudo easy_install pip"
     - "virtualenv venv"
     - "ls"
-    - "source venv/bin/active"
+    - "source venv/bin/activate"
 install:
     - "pip install -r requirements.txt"
 script: 
