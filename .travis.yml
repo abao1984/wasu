@@ -7,9 +7,9 @@ before_install:
     - "sudo apt-get install python-setuptools"
     - "sudo apt-get install python-virtualenv"
     - "sudo easy_install pip"
-    - "cd wasu"
     - "virtualenv venv"
-    - "pwd"
+    - "ls"
+    - "source venv/bin/active"
 install:
     - "pip install -r requirements.txt"
 script: 
