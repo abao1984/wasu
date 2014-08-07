@@ -208,7 +208,7 @@ class PortInfo(models.Model):
     is_used = models.BooleanField()
     speed = models.ForeignKey('PortSpeed')
     port_type = models.ForeignKey('PortType')
-    is_multiply ＝ models.BooleanField()
+    is_multiply = models.BooleanField()
     port_number = models.IntegerField()
     device_template = models.ForeignKey('DeviceTemplate')
 
