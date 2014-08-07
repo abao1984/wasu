@@ -4,6 +4,9 @@ python:
     - "2.7"
 before_install:
     - "sudo apt-get install alien"
+    - "sudo apt-get install python-setuptools"
+    - "sudo apt-get install python-virtualenv"
+    - "sudo easy_install pip"
 install:
     - "pip install -r requirements.txt"
 script: nosetests
