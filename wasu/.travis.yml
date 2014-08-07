@@ -7,6 +7,11 @@ before_install:
     - "sudo apt-get install python-setuptools"
     - "sudo apt-get install python-virtualenv"
     - "sudo easy_install pip"
+    - "cd wasu"
+    - "virtualenv venv"
+    - "source venv/bin/active"
 install:
     - "pip install -r requirements.txt"
-script: nosetests
+script: 
+    - "sh init.sh"
+    - "python manage.py test"
