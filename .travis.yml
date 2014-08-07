@@ -9,7 +9,7 @@ before_install:
     - "sudo easy_install pip"
     - "cd wasu"
     - "virtualenv venv"
-    - "source venv/bin/active"
+    - "pwd"
 install:
     - "pip install -r requirements.txt"
 script: 
