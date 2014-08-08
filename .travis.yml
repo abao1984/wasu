@@ -5,7 +5,7 @@ before_install:
     - "sudo apt-get install alien"
     - "sudo alien -i oracle-instantclient-basic-10.2.0.5-1.x86_64.rpm"
     - "sudo alien -i oracle-instantclient-devel-10.2.0.5-1.x86_64.rpm"
-    - "ls /usr/lib/oracle"
+    - "ls /usr/lib/oracle/10.2.0.5"
     - "sudo apt-get install wget"
     - "sudo apt-get install python-setuptools"
     - "sudo apt-get install python-virtualenv"
@@ -14,7 +14,7 @@ before_install:
     - "ls"
     - "source venv/bin/activate"
 install:
-    - "pip install -r requirements.txt"
+    #    - "pip install -r requirements.txt"
 script: 
     - "sh init.sh"
     - "python manage.py test"
