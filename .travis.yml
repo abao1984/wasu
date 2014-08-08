@@ -18,7 +18,8 @@ before_install:
     - "ls"
     - "source venv/bin/activate"
 install:
-    #    - "pip install -r requirements.txt"
+       - "pip install -r requirements.txt"
 script: 
+    - "cd wasu"
     - "sh init.sh"
-#     - "python manage.py test"
+    - "python manage.py test"
