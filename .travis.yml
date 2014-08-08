@@ -5,7 +5,11 @@ before_install:
     - "sudo apt-get install alien"
     - "sudo alien -i oracle-instantclient-basic-10.2.0.5-1.x86_64.rpm"
     - "sudo alien -i oracle-instantclient-devel-10.2.0.5-1.x86_64.rpm"
-    - "ls /usr/lib/oracle/10.2.0.5"
+    - "export ORACLE_HOME=/usr/lib/oracle/10.2.0.5/client64"
+    - "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib"
+    - "export PATH=$PATH:$ORACLE_HOME/bin"
+    - "ls $ORACLE_HOME/lib"
+    - "ls $ORACLE_HOME/bin"
     - "sudo apt-get install wget"
     - "sudo apt-get install python-setuptools"
     - "sudo apt-get install python-virtualenv"
@@ -17,4 +21,4 @@ install:
     #    - "pip install -r requirements.txt"
 script: 
     - "sh init.sh"
-    - "python manage.py test"
+#     - "python manage.py test"
