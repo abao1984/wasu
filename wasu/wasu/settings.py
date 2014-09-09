@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-#    'boss',
+    'boss',
     'rmss',
     'tastypie',
 )
@@ -65,14 +65,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
-#    'boss':{
-#        'ENGINE':'django.db.backends.oracle',
-#        'NAME':'boss',
-#        'USER':'sm',
-#        'PASSWORD':'sm',
-#        'HOST':'125.210.208.69',
-#        'PORT':'1521',
-#        },
+    'boss':{
+        'ENGINE':'django.db.backends.oracle',
+        'NAME':'boss',
+        'USER':'sm',
+        'PASSWORD':'sm',
+        'HOST':'125.210.208.69',
+        'PORT':'1521',
+        },
 }
 
 # Internationalization
